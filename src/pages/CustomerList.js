@@ -2,7 +2,6 @@ import { Helmet } from 'react-helmet';
 import { Box, Container } from '@material-ui/core';
 import CustomerListResults from '../components/customer/CustomerListResults';
 import CustomerListToolbar from '../components/customer/CustomerListToolbar';
-import customers from '';
 import { firebaseListCostumers,} from 'src/utils/FirebaseUtil';
 import { useEffect, useState } from 'react';
 

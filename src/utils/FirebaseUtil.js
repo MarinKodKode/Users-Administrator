@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,  } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
-import {collection , getDocs , getFirestore} from "firebase/firestore";
+import {collection , getDocs , setDoc, getFirestore, doc} from "firebase/firestore";
+import { uuid } from 'uuidv4';
 
 export function firebaseConfig(){
     const config = {
@@ -52,4 +53,11 @@ export async function firebaseListCostumers(colection){
    return listado;
 }
 
+export function firebaseSaveCustomer(coleccion, objeto){
+
+    objeto.id= uuid();
+
+    let referencia = doc(getFirestore(), coleccion, objeto.id);
+    setDoc(referencia, objeto);
+}
 
