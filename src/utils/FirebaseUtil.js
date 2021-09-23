@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,  } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
 
 export function firebaseConfig(){
@@ -16,5 +17,18 @@ export function firebaseConfig(){
         const analytics = getAnalytics(app);
 }
 
+export function firebaseRegisterUser(email, password){
+    createUserWithEmailAndPassword(getAuth(), email, password)
+    .then(getUserCredentials => {
+        //getUserCredentials.user.
+    })
+}
+
+export async function firebaseLogin(email, password){
+    const auth = getAuth();
+    let credenciales = await signInWithEmailAndPassword(auth, email, password); 
+    //credenciales.user;
+    return true;
+}
 
 

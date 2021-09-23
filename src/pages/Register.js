@@ -12,13 +12,14 @@ import {
   TextField,
   Typography
 } from '@material-ui/core';
+import { firebaseRegisterUser } from 'src/utils/FirebaseUtil';
 
 const Register = () => {
   const navigate = useNavigate();
 
-  const registrarUsuario = (e) =>{
-    
-   // e.preventDefault();
+  const registrarUsuario = (usuario) =>{
+    firebaseRegisterUser(usuario.email, usuario.password);
+    navigate('/app/dashboard', { replace: true });
   }
 
   return (
@@ -54,9 +55,7 @@ const Register = () => {
             })
           }
             onSubmit={(usuario) => {
-
-              alert(usuario.firstName);
-
+              registrarUsuario(usuario);
               //navigate('/app/dashboard', { replace: true });
             }}
           >
@@ -171,7 +170,6 @@ const Register = () => {
                 )}
                 <Box sx={{ py: 2 }}>
                   <Button
-                    onClick={registrarUsuario}
                     color="primary"
                     disabled={isSubmitting}
                     fullWidth
