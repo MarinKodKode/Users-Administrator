@@ -11,12 +11,13 @@ import {
   TextField,
   Typography
 } from '@material-ui/core';
+import { firebaseLogin } from 'src/utils/FirebaseUtil';
 
 const Login = () => {
   const navigate = useNavigate();
 
   const iniciarSesion = async (credenciales) =>{
-    let sessionStarted = await firebaseLogin(getUserCredentials.email, getUserCredentials.password);
+    let sessionStarted = await firebaseLogin(credenciales.email, credenciales.password);
 
     if(sessionStarted){
       navigate('/app/dashboard', { replace: true });

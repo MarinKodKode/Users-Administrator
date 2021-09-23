@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,  } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
+import {collection , getDocs , getFirestore} from "firebase/firestore";
 
 export function firebaseConfig(){
     const config = {
@@ -26,9 +27,29 @@ export function firebaseRegisterUser(email, password){
 
 export async function firebaseLogin(email, password){
     const auth = getAuth();
-    let credenciales = await signInWithEmailAndPassword(auth, email, password); 
-    //credenciales.user;
+    try{
+        let credenciales = await signInWithEmailAndPassword(auth, email, password); 
+        //credenciales.user;
+    }catch(e){
+        return false;
+    }  
     return true;
+}
+
+export async function firebaseListCostumers(colection){
+   let listado = [];
+   let consult = collection(getFirestore(), colection);
+   let response = await getDocs(consult);
+
+   response.forEach(documento => {
+        
+    let objeto  = documento.data();
+    objeto.id = documento.id;
+    listado.push(objeto);
+
+   });
+
+   return listado;
 }
 
 
