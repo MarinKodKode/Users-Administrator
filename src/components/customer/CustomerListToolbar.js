@@ -31,6 +31,7 @@ const CustomerListToolbar = (props) => {
       >
         Añadir cliente
       </Button>
+     
     </Box>
     <Box sx={{ mt: 3 }}>
       <Card>

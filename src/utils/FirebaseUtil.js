@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,  } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
-import {collection , getDocs , setDoc, getFirestore, doc} from "firebase/firestore";
+import {collection , getDocs , setDoc, getFirestore, deleteDoc, doc} from "firebase/firestore";
 import { uuid } from 'uuidv4';
 
 export function firebaseConfig(){
@@ -59,5 +59,9 @@ export function firebaseSaveCustomer(coleccion, objeto){
 
     let referencia = doc(getFirestore(), coleccion, objeto.id);
     setDoc(referencia, objeto);
+}
+
+export async function firebaseBorrar(coleccion, id) {
+    await deleteDoc(doc(getFirestore(), coleccion, id));
 }
 

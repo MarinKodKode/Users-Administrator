@@ -5,6 +5,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Avatar,
   Box,
+  Button,
   Card,
   Checkbox,
   Table,
@@ -16,6 +17,9 @@ import {
   Typography
 } from '@material-ui/core';
 import getInitials from '../../utils/getInitials';
+
+import { firebaseBorrar } from 'src/utils/FirebaseUtil';
+
 
 const CustomerListResults = ({ customers, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
@@ -125,6 +129,19 @@ const CustomerListResults = ({ customers, ...rest }) => {
                   </TableCell>
                   <TableCell>
                     {customer.phone}
+                  </TableCell>
+                  <TableCell>
+                     <Button
+                      onClick={() => {
+                        firebaseBorrar('clientes',customer.id);
+                        alert("Cliente eliminado");
+                        window.location.reload();
+                      }}
+                        color="error"
+                        variant="contained"
+                      >
+                        Borrar
+                      </Button>
                   </TableCell>
                 </TableRow>
               ))}
